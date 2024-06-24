@@ -1,12 +1,10 @@
 import asyncio
 import functools
-from functools import lru_cache
 from io import BytesIO
 from typing import Optional, Union
 
 import aiohttp
 import requests
-from aiocache import cached
 from PIL import Image
 from PIL.GifImagePlugin import GifImageFile
 
@@ -24,7 +22,7 @@ async def run_in_executor(func, **kwargs):
     return data
 
 
-@lru_cache(maxsize=32)
+
 def load_image(
     link: str, raw: bool = False
 ) -> Union[Image.Image, GifImageFile]:
@@ -50,7 +48,7 @@ def load_image(
     return image
 
 
-@cached(ttl=60 * 60 * 24)
+
 async def load_image_async(
     link: str,
     session: Optional[aiohttp.ClientSession] = None,
